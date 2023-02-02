@@ -37,3 +37,6 @@ So far, there's a pattern in the 3 machines (mealy, moore, fst) -- all recursive
 By using a base functor we get rid of recursion. -> the base function is called STEP 
 https://hackage.haskell.org/package/machines-0.4.1/docs/Data-Machine-Type.html#t:Step 
 
+https://stackoverflow.com/questions/27997155/finite-state-transducers-in-haskell 
+
+https://github.com/goldibex/parsley-core 
