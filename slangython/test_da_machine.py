@@ -7,7 +7,7 @@ from slangython.build_da_machine import build_da_machine
 machine = build_da_machine()
 
 
-with open('sample_code.slang', 'r') as f:
+with open('fibonacci_code.slang', 'r') as f:
 	code = f.read()
 	print(code)
 	words = [word for word in re.split('( |\n|\r|\b|\t)', code) if word != '' and word != ' ']
@@ -31,4 +31,6 @@ for word in result:
 #print(processed_result)
 print(''.join(processed_result))
 
+with open('output_code.py', 'w') as f:
+	f.write(''.join(processed_result))
 

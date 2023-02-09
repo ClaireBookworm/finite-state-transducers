@@ -80,7 +80,14 @@ def build_da_machine():
 	machine.points[im_in_yr_loop_uppin_point].add_quick_transition(['YR'],im_in_yr_loop_uppin_yr_point,'for')
 	im_in_yr_loop_uppin_yr_til_point = machine.add_point(parrot_=True)
 	machine.points[im_in_yr_loop_uppin_yr_point].add_quick_transition(['TIL'],im_in_yr_loop_uppin_yr_til_point,'in range(')
-	machine.points[im_in_yr_loop_uppin_yr_til_point].add_quick_transition(['LOL'],statement_point,'+1) :')
+	machine.points[im_in_yr_loop_uppin_yr_til_point].add_quick_transition(['LOL'],statement_point,'+ 1 ) :')
+
+	show_point = machine.add_point()
+	machine.points[statement_point].add_quick_transition(['SHOW'],show_point,'')
+	show_yr_point = machine.add_point(parrot_=True)
+	machine.points[show_point].add_quick_transition(['YR'],show_yr_point,'print(')
+	machine.points[show_yr_point].add_quick_transition(['LMAO'],statement_point,')')
+
 
 	machine.start_id = statement_point
 	return machine
