@@ -1,0 +1,15 @@
+I HAS A x ITZ 0
+I HAS A b ITZ :( 	BTW you suck
+
+JIC x SAEM AS b LOL
+	x ITZ b
+JK LOL
+	x ITZ 1
+
+I HAS A c ITZ 13
+
+IM IN YR LOOP LOL
+	x ITZ x SUM 1
+	JIC x BIGGR THAN c PRODUKT c LOL
+		GTFO
+		

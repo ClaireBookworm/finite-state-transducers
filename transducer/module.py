@@ -1,18 +1,26 @@
 
 class Point:
-	def __init__(self,id_,isFinal_,transitions_=None):
+	def __init__(self,id_,isFinal_,parrot_,transitions_=None):
 		self.id = id_
 		self.isFinal = isFinal_
+		self.parrot_ = parrot_
 		self.transitions = transitions_
 		if self.transitions is None:
 			self.transitions = []
+
 	def add_transition(self,transition=None):
 		if transition is not None:
 			self.transitions.append(transition)
+
+	def add_quick_transition(self,words_,target_,output_):
+		self.transitions.append(Transition(words_,self.id,target_,output_))
+
 	def get_transition(self,word):
 		for transition in self.transitions:
 			if transition.contains(word):
 				return transition
+		if self.parrot_:
+			return Transition([], self.id, self.id, word)
 		raise SyntaxError('you have fucked up')
 		return None
 
@@ -22,12 +30,16 @@ class Transition:
 		self.start = start_
 		self.target = target_
 		self.output = output_
+
 	def contains(self,word):
 		return (word in self.words)
 
 class FiniteStateTranducer:
 	def __init__(self):
-		pass
+		self.start_id = 0
+		self.max_id = 0
+		self.points = {}
+		
 	def build(self,start_id_,clear_points,transitions):
 		self.start_id = start_id_
 		self.points = clear_points # a dict id:point
@@ -36,10 +48,19 @@ class FiniteStateTranducer:
 				if transition.start == id_:
 					print(transition.start, transition.target, id_)
 					self.points[id_].add_transition(transition)
+		self.max_id = max(self.points.keys())
+
+	def add_point(self, isFinal_=False, parrot_=False): # please remember to implement parrot
+		self.max_id += 1
+		self.points[self.max_id] = Point(self.max_id, isFinal_, parrot_)
+		return self.max_id
+
 	def step(self,word):
+		#print(self.start_id,word)
 		transition = self.points[self.start_id].get_transition(word)
 		self.start_id = transition.target
 		return self.points[transition.target].isFinal, transition.output
+
 	def run(self,words):
 		outputs = []
 		end = False
@@ -47,6 +68,7 @@ class FiniteStateTranducer:
 			end, output = self.step(word)
 			outputs.append(output)
 		return end, outputs # report if it's successful or not
+
 	def build_from_dict(self,machine):
 		clear_points = {}
 		for i,point in enumerate(machine['nodes']):
